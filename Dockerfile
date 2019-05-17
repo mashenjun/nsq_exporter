@@ -1,12 +1,21 @@
-FROM alpine:latest
+FROM golang:1.12 as builder
+ENV GOPATH /go
+RUN mkdir -p $GOPATH/src/github.com/mashenjun/nsq_exporter
+COPY ./ $GOPATH/src/github.com/mashenjun/nsq_exporter
+WORKDIR $GOPATH/src/github.com/mashenjun/nsq_exporter
+RUN go build -ldflags "-X main.buildAt=`date +%FT%T%z`" -o $GOPATH/bin/nsq_exporter main.go
 
+FROM alpine:3.5
+LABEL VERSION="1.0"
+LABEL DESCRIPTION="nsq_exporter docker image."
+LABEL MAINTAINER="mashenjun"
 EXPOSE 9117
 
-ENV  GOPATH /go
-ENV APPPATH $GOPATH/src/github.com/lovoo/nsq_exporter
-COPY . $APPPATH
-RUN apk add --update -t build-deps go git mercurial libc-dev gcc libgcc \
-    && cd $APPPATH && go get -d && go build -o /nsq_exporter \
-    && apk del --purge build-deps && rm -rf $GOPATH
+RUN apk update && apk add --no-cache ca-certificates curl bash tree tzdata \
+    && mkdir /lib64 \
+    && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
-ENTRYPOINT ["/nsq_exporter"]
+ENV TZ=Asia/Shanghai
+WORKDIR /
+COPY --from=builder /go/bin/nsq_exporter .
+CMD ["/nsq_exporter"]
