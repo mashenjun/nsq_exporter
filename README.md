@@ -2,6 +2,7 @@
 
 NSQ exporter for prometheus.io, written in go.  
 the orginal repo is [lovoo/nsq_exporter](https://github.com/lovoo/nsq_exporter)
+ps: this repo is just for personal usage. 
 
 ## Usage
 ### Without Docker  
