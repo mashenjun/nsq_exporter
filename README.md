@@ -15,7 +15,7 @@ ps: this repo is just for personal usage.
  will build the binary into `build/` folder  
 
 ## Exported Metrics
-### stats.channels exports following metrics
+### `stats.channels` exposes following metrics
 | metrics                     | type  | lables               | description                     | example                                                                           |
 |-----------------------------|-------|----------------------|---------------------------------|-----------------------------------------------------------------------------------|
 | nsq_channel_backend_depth   | gauge | topic,channel,paused | Queue backend depth             | nsq_channel_backend_depth{channel="bind",paused="false",topic="bind_teacher"} 0   |
@@ -29,7 +29,7 @@ ps: this repo is just for personal usage.
 | nsq_channel_requeue_count   | gauge | topic,channel,paused | Count of requeued message ever  | nsq_channel_requeue_count{channel="bind",paused="false",topic="bind_teacher"} 16  |
 | nsq_channel_timeout_count   | gauge | topic,channel,paused | Count of timeout event ever     | nsq_channel_timeout_count{channel="bind",paused="false",topic="bind_teacher"} 3   |
 
-### stats.clients exports following metrics(not very useful, expose too many metrics when there are many client)
+### `stats.clients` exposes following metrics(not very useful, expose too many metrics)
 | metrics                    | type  | lables                                                                     | description                                                                                                                 | example                                                                                                                                                                                                                                                              |
 |----------------------------|-------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | nsq_client_connect_ts      | gauge | topic,channel,deflate,snappy,tls,client_id,hostname,version,remote_address | Connect timestamp for each client                                                                                           | nsq_client_connect_ts{channel="bind",client_id="118.190.216.176",deflate="false",hostname="118.190.216.176",instance="47.104.187.154:9117",job="nsq",remote_address="118.190.216.176:24067",snappy="false",tls="false",topic="bind_teacher",version="V2"} 1558058092 |
@@ -40,7 +40,7 @@ ps: this repo is just for personal usage.
 | nsq_client_ready_count     | gauge | topic,channel,deflate,snappy,tls,client_id,hostname,version,remote_address | Ready count                                                                                                                 | nsq_client_ready_count{channel="bind",client_id="118.190.216.176",deflate="false",hostname="118.190.216.176",remote_address="118.190.216.176:24067",snappy="false",tls="false",topic="bind_teacher",version="V2"} 1                                                  |
 | nsq_client_requeue_count   | gauge | topic,channel,deflate,snappy,tls,client_id,hostname,version,remote_address | Requeue count                                                                                                               | nsq_client_requeue_count{channel="bind",client_id="118.190.216.176",deflate="false",hostname="118.190.216.176",remote_address="118.190.216.176:24067",snappy="false",tls="false",topic="bind_teacher",version="V2"} 0                                                |
 | nsq_client_sample_rate     | gauge | topic,channel,deflate,snappy,tls,client_id,hostname,version,remote_address | Sample Rate                                                                                                                 | nsq_client_sample_rate{channel="bind",client_id="118.190.216.176",deflate="false",hostname="118.190.216.176",remote_address="118.190.216.176:24067",snappy="false",tls="false",topic="bind_teacher",version="V2"} 0                                                  |
-### stats.topics exports following metrics
+### `stats.topics` expose` following metrics
 | metrics                             | type  | lables       | description                       | example                                                             |
 |-------------------------------------|-------|--------------|-----------------------------------|---------------------------------------------------------------------|
 | nsq_topic_backend_depth             | gauge | topic,paused | Queue backend depth               | nsq_topic_backend_depth{paused="false",topic="login"} 0             |
